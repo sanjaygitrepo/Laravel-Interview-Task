@@ -26,7 +26,7 @@ class StoreRegisterRequest extends FormRequest
         return [
 
                 'name' => 'required|min:3',
-                'email' => 'required|email',
+                'email' => 'required|email|unique:users',
                 'password' => 'required|min:6',
                 'profile_image' => 'required|mimes:jpeg,jpg,png,gif|max:10000'
             ];

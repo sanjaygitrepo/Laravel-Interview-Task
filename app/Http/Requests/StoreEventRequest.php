@@ -25,12 +25,12 @@ class StoreEventRequest extends FormRequest
     {
         return [
 
-                'name' => 'required|min:3',
+                'name' => 'required|min:3|unique:events',
                 'location' => 'required',
                 'latitude' => 'required',
                 'longitude' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required'
+                'start_date' => 'required|date',
+                'end_date' => 'date|after:start_date'
             ];
     }
 }

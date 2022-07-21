@@ -6,10 +6,14 @@ use App\Http\Requests\StoreRegisterRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
+use Auth;
 class RegisterController extends Controller
 {
     public function registerForm()
     {
+        if (Auth::check()) {
+            return redirect()->route('events.index');
+        }        
         return view('register');;
     }
     public function register(StoreRegisterRequest $request)
@@ -23,6 +27,6 @@ class RegisterController extends Controller
             $data['profile_image'] = $profile_image;
             User::create($data);
 
-            return redirect()->route('login');            
+            return redirect()->route('user.login');            
     }
 }

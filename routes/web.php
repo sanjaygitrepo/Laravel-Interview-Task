@@ -15,13 +15,15 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::match(['get', 'post'], 'login',[LoginController::class,'login'])->name('user.login');
+Route::get('login',[LoginController::class,'login'])->name('user.login');
+Route::post('login',[LoginController::class,'doLogin'])->name('user.doLogin');
+Route::get('logout',[LoginController::class,'logout'])->name('user.logout')->middleware('guest');
 Route::get('register',[RegisterController::class,'registerForm'])->name('user.registerForm');
 Route::post('register',[RegisterController::class,'register'])->name('user.register');
 
-Route::resource('events',EventController::class);
+Route::resource('events',EventController::class)->middleware('guest');
 
 Route::fallback(function () {
-	
+
     return redirect()->route('events.index');
 });
