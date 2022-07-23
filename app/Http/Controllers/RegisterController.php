@@ -12,7 +12,7 @@ class RegisterController extends Controller
     public function registerForm()
     {
         if (Auth::check()) {
-            return redirect()->route('events.index');
+            return redirect()->route('categories.index');
         }        
         return view('register');;
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 /*
@@ -21,9 +22,14 @@ Route::get('logout',[LoginController::class,'logout'])->name('user.logout')->mid
 Route::get('register',[RegisterController::class,'registerForm'])->name('user.registerForm');
 Route::post('register',[RegisterController::class,'register'])->name('user.register');
 
-Route::resource('events',EventController::class)->middleware('guest');
+Route::group(['middleware' => 'guest'], function () {
+    //Route::resource('events',EventController::class);
+    Route::get('categories/subcategories/{id}',[CategoryController::class,'subcategory']);
+    Route::post('categories/add-subcategory',[CategoryController::class,'addSubcategory']);
+    Route::resource('categories',CategoryController::class);
 
-Route::fallback(function () {
+    Route::fallback(function () {
 
-    return redirect()->route('events.index');
+        return redirect()->route('categories.index');
+    });
 });

@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->get('/get_categories', [CategoryController::class,'get_categories']);
+
+Route::post('login',[LoginController::class,'login']);

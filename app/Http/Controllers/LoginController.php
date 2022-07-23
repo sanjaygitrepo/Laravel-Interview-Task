@@ -8,7 +8,7 @@ class LoginController extends Controller
     public function login(Request $request){
 
         if (Auth::check()) {
-            return redirect()->route('events.index');
+            return redirect()->route('categories.index');
         }        
                     
         return view('login');
@@ -28,7 +28,7 @@ class LoginController extends Controller
 
          if(Auth::attempt($user_data))
          {
-           return redirect()->route('events.index');
+           return redirect()->route('categories.index');
          }else{
 
           return redirect()->back()->withInput($request->only('email'))->with('error-message',"Invalid email or password");
